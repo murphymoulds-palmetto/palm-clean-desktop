@@ -1,0 +1,3 @@
+image_name: desktop_cleanup
+plugins: []
+protected_branches: [main]

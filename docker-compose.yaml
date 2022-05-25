@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  desktop_cleanup:
+    image: desktop_cleanup
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
