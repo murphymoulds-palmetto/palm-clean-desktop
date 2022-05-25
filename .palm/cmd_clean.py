@@ -41,7 +41,8 @@ def clean(ctx):
         for each_file in Path(src_path).glob('*.*'): # grabs all files
             if each_file.suffix in configuration[key]['allowed_values']:
                 files_to_move.append(each_file)
-            # each_file.rename(trg_path.joinpath(each_file.name)) # moves to parent folder.
+                #TODO: this works but want to display to user some metrics prior to moving everything
+                # each_file.rename(configuration[key]['destination_path'].joinpath(each_file.name)) # moves to parent folder.
 
         click.echo(destination_path)
         click.echo(files_to_move)
