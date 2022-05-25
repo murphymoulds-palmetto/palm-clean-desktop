@@ -1,22 +1,23 @@
 from distutils.command.config import config
-import enum
 import click
-import re
 from typing import Optional
 from pathlib import Path
-import shutil
-import os
 
-@click.command('clean')
+@click.command('clean-desktop')
 @click.pass_obj
 
 def cli(ctx):
-    """clean"""
+    """Clean Desktop
+    
+    1) Create a images and spreadsheets folder\n
+    2) run `palm clean-desktop`\n
+    3) all jpg, png, csv, and numbers will be moved to those folders
+    """
     click.echo("palm executing clean")
-    command = f"echo 'clean running!'"
-    clean(ctx)
 
-def clean(ctx):
+    clean_desktop(ctx)
+
+def clean_desktop(ctx):
 
     src_path = Path.home() / 'Desktop'
     configuration = {
@@ -29,19 +30,14 @@ def clean(ctx):
             'allowed_values': ['.csv', '.numbers']
         }
     }
-    
 
     # get Path to destinations
     for i, (key, val) in enumerate(configuration.items()):
-        files_to_move = []
         destination_path = Path(src_path / key)
         configuration[key]['destination_path'] = destination_path
 
-
-        for each_file in Path(src_path).glob('*.*'): # grabs all files
+        # grabs all files
+        for each_file in Path(src_path).glob('*.*'): 
             if each_file.suffix in configuration[key]['allowed_values']:
-                files_to_move.append(each_file)
-            # each_file.rename(trg_path.joinpath(each_file.name)) # moves to parent folder.
-
-        click.echo(destination_path)
-        click.echo(files_to_move)
+                # moves to parent folder.
+                each_file.rename(destination_path.joinpath(each_file.name))
