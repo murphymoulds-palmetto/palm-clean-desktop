@@ -1,6 +1,7 @@
 images: 
   destination_path: ''
-  allowed_values: ['.jpg', '.png', '.jpeg']
+  allowed_values: ['.jpg', '.png']
+  # allowed_values: ['.jpg', '.png', '.jpeg']
 
 spreadsheets:
   destination_path: ''
