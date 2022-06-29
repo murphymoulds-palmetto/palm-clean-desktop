@@ -1,6 +1,8 @@
+from bdb import Breakpoint
 from distutils.command.config import config
 import enum
 import click
+import yaml
 from typing import Optional
 from pathlib import Path
 
@@ -21,6 +23,7 @@ def cli(ctx):
 def clean_desktop(ctx):
 
     src_path = Path.home() / 'Desktop'
+    file_directory_config = Path(__file__).parent / 'file_directory_config.yaml'
 
     configuration = {
         'images': {
@@ -33,6 +36,10 @@ def clean_desktop(ctx):
         }
     }
 
+    with file_directory_config.open() as fp:
+        data = yaml.safe_load(fp)
+
+    breakpoint()
     # get Path to destinations
     for i, (key, val) in enumerate(configuration.items()):
         destination_path = Path(src_path / key)

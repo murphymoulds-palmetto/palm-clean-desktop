@@ -1,0 +1,7 @@
+images: 
+  destination_path: ''
+  allowed_values: ['.jpg', '.png', '.jpeg']
+
+spreadsheets:
+  destination_path: ''
+  allowed_values: ['.csv', '.numbers']
