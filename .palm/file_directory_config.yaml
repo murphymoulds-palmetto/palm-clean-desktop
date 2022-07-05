@@ -1,0 +1,9 @@
+images:
+    allowed_values:
+    - .jpg
+    - .png
+    - .jpeg
+spreadsheets:
+    allowed_values:
+    - .csv
+    - .numbers
