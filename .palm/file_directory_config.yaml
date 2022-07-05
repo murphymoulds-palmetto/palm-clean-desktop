@@ -1,8 +1,9 @@
-images: 
-  destination_path: ''
-  allowed_values: ['.jpg', '.png']
-  # allowed_values: ['.jpg', '.png', '.jpeg']
-
+images:
+    allowed_values:
+    - .jpg
+    - .png
+    - .jpeg
 spreadsheets:
-  destination_path: ''
-  allowed_values: ['.csv', '.numbers']
+    allowed_values:
+    - .csv
+    - .numbers
