@@ -7,3 +7,10 @@ spreadsheets:
     allowed_values:
     - .csv
     - .numbers
+    - .xlsx
+tableau:
+    allowed_values:
+    - .twb
+yml:
+    allowed_values:
+    - .yml
