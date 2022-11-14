@@ -50,6 +50,7 @@ def clean_desktop(ctx):
             elif each_file.suffix in val['allowed_values']:
               each_file.rename(destination_path.joinpath(each_file.name))
 
+# TODO: This creates new folders great but doesn't add the files
 def handle_unmatched_suffixes(ctx, suffix_to_check, file_directory_config):
 
     with file_directory_config.open() as fp:
