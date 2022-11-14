@@ -3,7 +3,25 @@ images:
     - .jpg
     - .png
     - .jpeg
+json:
+    allowed_values:
+    - .topojson
+    - .geojson
+pdf:
+    allowed_values:
+    - .pdf
 spreadsheets:
     allowed_values:
     - .csv
     - .numbers
+    - .xlsx
+sql:
+    allowed_values:
+    - .sql
+tableau:
+    allowed_values:
+    - .twb
+    - .twbx
+yml:
+    allowed_values:
+    - .yml
