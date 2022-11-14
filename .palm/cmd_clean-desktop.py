@@ -1,16 +1,18 @@
-from distutils.command.config import config
 import enum
+from distutils.command.config import config
+from pathlib import Path
+from typing import Optional
+
 import click
 import yaml
-from typing import Optional
-from pathlib import Path
+
 
 @click.command('clean-desktop')
 @click.pass_obj
 
 def cli(ctx):
     """Clean Desktop
-    
+
     1) Create a images and spreadsheets folder\n
     2) run `palm clean-desktop`\n
     3) all jpg, png, csv, and numbers will be moved to those folders
@@ -23,9 +25,14 @@ def clean_desktop(ctx):
 
     src_path = Path.home() / 'Desktop'
     file_directory_config = Path(__file__).parent / 'file_directory_config.yaml'
-    
+
     with file_directory_config.open() as fp:
         configuration = yaml.safe_load(fp)
+
+    existing_suffixes = []
+
+    for i, (key, val) in enumerate(configuration.items()):
+      existing_suffixes.extend(val['allowed_values'])
 
     # get Path to destinations
     for i, (key, val) in enumerate(configuration.items()):
@@ -37,12 +44,14 @@ def clean_desktop(ctx):
 
         # grabs all files
         for each_file in Path(src_path).glob('*.*'):
-            if not each_file.name.startswith('.'):
-                handle_unmatched_suffixes(ctx, each_file.suffix, file_directory_config)
-                each_file.rename(destination_path.joinpath(each_file.name))
+          if not each_file.name.startswith('.'):
+            if each_file.suffix not in existing_suffixes:
+              handle_unmatched_suffixes(ctx, each_file.suffix, file_directory_config)
+            elif each_file.suffix in val['allowed_values']:
+              each_file.rename(destination_path.joinpath(each_file.name))
 
 def handle_unmatched_suffixes(ctx, suffix_to_check, file_directory_config):
-    
+
     with file_directory_config.open() as fp:
         configuration_raw = yaml.safe_load(fp)
 
